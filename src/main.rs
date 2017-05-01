@@ -63,7 +63,6 @@ fn main() {
 
 // output logo
 fn logo() {
-    use ansi_term::Style;
     use ansi_term::Colour::{Cyan, Yellow};
 
     println!("                            {}",
@@ -112,9 +111,4 @@ fn logo() {
                  .paint("                           I T   O P E R A T O R"));
     println!("{}", line);
     println!();
-}
-
-
-pub struct Config {
-    pub port: u32,
 }
