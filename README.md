@@ -1,6 +1,18 @@
-# IT Systems Operator
+# IT Operator
 
 An application to manage complex IT structures easily.
+
+
+## Install
+
+You may use a prebuilt binary from the
+[GitHub Releases](https://github.com/alinex/rust-operator/releases) page.
+
+Alternately, it can just be installed with cargo, the rust language package manager:
+
+    # install rust and cargo from http://rustup.rs first
+    cargo install just
+    # add ~/.cargo/bin to your PATH if not already done
 
 
 ## Idea

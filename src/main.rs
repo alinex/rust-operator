@@ -1,16 +1,18 @@
 //!
-//! # IT Systems Operator
+//! # IT Operator
 //!
 //! An application to manage complex IT structures easily.
 //!
+//! Find the source code at [GutHub](https://github.com/alinex/rust-operator).
+//!
 //! **Currently under heavy development!**
 
-#[macro_use(crate_version, crate_authors, crate_description)]
+#[macro_use]
 extern crate clap;
 extern crate webserver;
 extern crate ansi_term;
 
-use clap::{Arg, App};
+use clap::{App, Arg};
 
 use std::process;
 use std::io::prelude::*;
@@ -20,6 +22,7 @@ fn main() {
 
     // initialization
     let mut stderr = std::io::stderr();
+    // method to check for unsigned integer for arguments
     fn is_u32(v: String) -> Result<(), String> {
         if v.parse::<u32>().is_ok() {
             return Ok(());
@@ -97,11 +100,14 @@ fn logo() {
              Yellow.bold().paint("|__| |_____\\ \\___|"),
              Cyan.paint("#####           ##### #####"));
     println!("{}",
-             Cyan.paint("      #####    ##### #####                      #####          #####   #####"));
+             Cyan.paint("      #####    ##### #####                      #####          #####   \
+                         #####"));
     println!("{}",
-             Cyan.paint("     ##### ######### ########################## ############  #####     #####"));
+             Cyan.paint("     ##### ######### ########################## ############  #####     \
+                         #####"));
     println!("{}",
-             Cyan.paint("    ##### ##########  ########################   ########### #####       #####"));
+             Cyan.paint("    ##### ##########  ########################   ########### #####       \
+                         #####"));
     let line = Cyan.paint("    ___________________________________________________________________________");
     println!("{}", line);
     println!();
@@ -111,4 +117,10 @@ fn logo() {
                  .paint("                           I T   O P E R A T O R"));
     println!("{}", line);
     println!();
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn it_works() {}
 }
