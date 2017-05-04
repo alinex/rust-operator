@@ -1,6 +1,6 @@
-# IT Operator
+# Operator
 
-An application to manage complex IT structures easily.
+An application to manage data structures through a web interface.
 
 
 ## Install
