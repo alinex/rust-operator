@@ -1,7 +1,7 @@
 [package]
 name = "webserver"
 version = "0.1.0"
-authors = ["alinex <info@alinex.de>"]
+authors = ["Alexander Schilling <info@alinex.de>"]
 
 [dependencies]
 log = "0.3"

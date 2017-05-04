@@ -1,12 +1,11 @@
 debug TEST:
 	cargo test --test {{TEST}} --features debug
 
-tests:
-  cargo test
-#  cargo test --features "yaml unstable"
+test:
+  cargo test -- --nocapture
 
-test TEST:
-	cargo test --test {{TEST}}
+testonly TEST:
+	cargo test --test {{TEST}} -- --nocapture
 
 @bench: nightly
 	cargo bench && just remove-nightly
@@ -22,7 +21,7 @@ remove-nightly:
 
 showdoc:
   cargo doc --open
-  
+
 clean:
 	cargo clean
 	find . -type f -name "*.orig" -exec rm {} \;

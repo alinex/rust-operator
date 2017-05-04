@@ -1,7 +1,7 @@
 [package]
 name = "operator"
 version = "0.1.0"
-description = "An application to manage complex IT structures easily."
+description = "An application to manage data structures through a web interface."
 readme = "README.md"
 repository = "https://github.com/alinex/rust-operator"
 #documentation = "http://ironframework.io/doc/iron/"
@@ -14,6 +14,9 @@ authors = ["Alexander Schilling <info@alinex.de>"]
 clap = '~2.23.2'
 ansi_term = '~0.9.0'
 webserver = { path = "webserver" }
+
+[dev-dependencies]
+gag = '*'
 
 [profile.release]
 opt-level = 3

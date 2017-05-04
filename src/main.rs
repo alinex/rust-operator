@@ -1,7 +1,7 @@
 //!
-//! # IT Operator
+//! # Operator
 //!
-//! An application to manage complex IT structures easily.
+//! An application to manage data structures through a web interface.
 //!
 //! Find the source code at [GutHub](https://github.com/alinex/rust-operator).
 //!
@@ -11,6 +11,9 @@
 extern crate clap;
 extern crate webserver;
 extern crate ansi_term;
+
+#[cfg(test)]
+extern crate gag;
 
 use clap::{App, Arg};
 
@@ -114,13 +117,29 @@ fn logo() {
     println!("{}",
              Yellow
                  .bold()
-                 .paint("                           I T   O P E R A T O R"));
+                 .paint("                              O P E R A T O R"));
     println!("{}", line);
     println!();
 }
 
+
+
 #[cfg(test)]
 mod tests {
+    use super::logo;
+
     #[test]
-    fn it_works() {}
+    fn output_logo() {
+        use std::io::Read;
+        use gag::BufferRedirect;
+
+        let mut buf = BufferRedirect::stdout().unwrap();
+
+        logo();
+
+        let mut output = String::new();
+        buf.read_to_string(&mut output).unwrap();
+
+        assert!(output.contains("O P E R A T O R"));
+    }
 }
