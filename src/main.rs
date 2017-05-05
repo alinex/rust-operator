@@ -2,10 +2,19 @@
 //! # Operator
 //!
 //! An application to manage data structures through a web interface.
+//! It is my first bigger application in rust and as this is used to learn more about ruat and
+//! it's eco system.
 //!
 //! Find the source code at [GutHub](https://github.com/alinex/rust-operator).
 //!
 //! **Currently under heavy development!**
+//!
+//! ## Main Packages
+//!
+//! Mainly the following crates are used:
+//!
+//! - [clap](../clap/index.html) - CLI argument parsing
+//! - [webserver](../webserver/index.html) - webserver based on iron
 
 #[macro_use]
 extern crate clap;
@@ -20,6 +29,7 @@ use clap::{App, Arg};
 use std::process;
 use std::io::prelude::*;
 
+// Startup of the binary call.
 fn main() {
     logo();
 
@@ -64,6 +74,8 @@ fn main() {
         writeln!(&mut stderr, "Application error: {}", e).expect("Could not write to stderr");
         process::exit(1);
     }
+
+    // add applications to webserver
 
 }
 

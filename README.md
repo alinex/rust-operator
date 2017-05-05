@@ -11,7 +11,7 @@ You may use a prebuilt binary from the
 Alternately, it can just be installed with cargo, the rust language package manager:
 
     # install rust and cargo from http://rustup.rs first
-    cargo install just
+    cargo install operator
     # add ~/.cargo/bin to your PATH if not already done
 
 

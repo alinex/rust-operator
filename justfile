@@ -1,6 +1,8 @@
+run LOGLEVEL="info":
+  RUST_LOG={{LOGLEVEL}} cargo run
+
 test:
   RUST_BACKTRACE=1 cargo test -- --nocapture
-
 testlib PATTERN:
 	RUST_BACKTRACE=1 cargo test --lib {{PATTERN}} -- --nocapture
 
@@ -9,7 +11,6 @@ debug TEST:
 
 build:
 	cargo build
-
 check:
 	cargo check
 
@@ -25,6 +26,8 @@ remove-nightly:
 @lint: nightly
 	cargo build --features lints && just remove-nightly
 
+doc:
+  cargo doc
 showdoc:
   cargo doc --open
 
@@ -36,10 +39,21 @@ release:
 	cargo build --release
 	strip target/release/operator
 
+# publish new version
 publish:
-	@mkdir -p dist
-	cargo build --release --target x86_64-unknown-linux-gnu
-	@cp target/x86_64-unknown-linux-gnu/release/operator dist/{{name}}-{{version}}-x86_64-unknown-linux-gnu
+  # check that active branch is master
+  git branch | grep '* master'
+  # check that everything is committed
+  git diff --no-ext-diff --quiet --exit-code
+  # create new version branch
+  git checkout -b {{version}}
+  git push --all
+  # publish crate
+  cargo publish
+  # create distribution files
+  @mkdir -p dist
+  cargo build --release --target x86_64-unknown-linux-gnu
+  @cp target/x86_64-unknown-linux-gnu/release/operator dist/{{name}}-{{version}}-x86_64-unknown-linux-gnu
 
 clean:
 	cargo clean
