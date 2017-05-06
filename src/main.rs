@@ -5,7 +5,7 @@
 //! It is my first bigger application in rust and as this is used to learn more about ruat and
 //! it's eco system.
 //!
-//! Find the source code at [GutHub](https://github.com/alinex/rust-operator).
+//! Find the source code at [`GutHub`](https://github.com/alinex/rust-operator).
 //!
 //! **Currently under heavy development!**
 //!
@@ -36,6 +36,7 @@ fn main() {
     // initialization
     let mut stderr = std::io::stderr();
     // method to check for unsigned integer for arguments
+    #[allow(needless_pass_by_value)]
     fn is_u32(v: String) -> Result<(), String> {
         if v.parse::<u32>().is_ok() {
             return Ok(());

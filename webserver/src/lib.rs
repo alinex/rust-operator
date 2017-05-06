@@ -17,15 +17,20 @@
 extern crate log;
 extern crate env_logger;
 extern crate iron;
+extern crate router;
 
 use std::error::Error;
 use iron::prelude::*;
 use iron::status;
+use router::Router;
 
 /// Start the webserver. The method will not return normally while the server is running endlessly.
 pub fn run() -> Result<(), Box<Error>> {
     env_logger::init().unwrap();
 
+    // setup routing
+    let mut router = Router::new();
+    router.get("/", hello_world, "index");
     // take all requests
     fn hello_world(_: &mut Request) -> IronResult<Response> {
         debug!("GET hello-world");
@@ -33,7 +38,7 @@ pub fn run() -> Result<(), Box<Error>> {
     }
 
     debug!("Start the webserver...");
-    Iron::new(hello_world).http("localhost:3000").unwrap();
+    Iron::new(router).http("localhost:3000").unwrap();
     println!("On 3000");
 
     Ok(())

@@ -7,3 +7,4 @@ authors = ["Alexander Schilling <info@alinex.de>"]
 log = "0.3"
 env_logger = "0.3"
 iron = "*"
+router = "*"

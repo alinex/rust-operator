@@ -15,16 +15,19 @@ check:
 	cargo check
 
 @bench: nightly
-	cargo bench && just remove-nightly
+  cargo bench
+  just stable
 
-nightly:
-	rustup override add nightly
+@nightly:
+	rustup override add nightly 2> /dev/null > /dev/null
 
-remove-nightly:
-	rustup override remove
+@stable:
+  rustup override remove 2> /dev/null
 
 @lint: nightly
-	cargo build --features lints && just remove-nightly
+  cargo install clippy 2> /dev/null || exit 0
+  cargo clippy
+  just stable
 
 doc:
   cargo doc
