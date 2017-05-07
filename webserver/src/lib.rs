@@ -39,7 +39,6 @@ pub fn run() -> Result<(), Box<Error>> {
 
     debug!("Start the webserver...");
     Iron::new(router).http("localhost:3000").unwrap();
-    println!("On 3000");
 
     Ok(())
 }
