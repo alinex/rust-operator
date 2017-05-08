@@ -20,12 +20,33 @@ extern crate iron;
 extern crate router;
 
 use std::error::Error;
+use std::fmt;
 use iron::prelude::*;
 use iron::status;
 use router::Router;
 
+/// The configuration structure is used to setup the server tu run.
+pub struct Config {
+    /// Server port to bind to.
+    ///
+    /// The default value is `3000` but keep in mind that you only be able to bind to ports lower
+    /// than 1024 as `root`.
+    pub port: u32,
+}
+impl Config {
+    /// Get the default configuration.
+    pub fn new() -> Config {
+        Config { port: 3000 }
+    }
+}
+impl fmt::Display for Config {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Server Setup: localhost:{}", self.port)
+    }
+}
+
 /// Start the webserver. The method will not return normally while the server is running endlessly.
-pub fn run() -> Result<(), Box<Error>> {
+pub fn run(config: Config) -> Result<(), Box<Error>> {
     env_logger::init().unwrap();
 
     // setup routing
@@ -37,8 +58,10 @@ pub fn run() -> Result<(), Box<Error>> {
         Ok(Response::with((status::Ok, "Hello World!")))
     }
 
-    debug!("Start the webserver...");
-    Iron::new(router).http("localhost:3000").unwrap();
+    info!("Start the webserver...");
+    debug!("{}", &config);
+    let server = "localhost:".to_string() + &config.port.to_string();
+    Iron::new(router).http(server).unwrap();
 
     Ok(())
 }

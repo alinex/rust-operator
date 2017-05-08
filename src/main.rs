@@ -36,7 +36,7 @@ fn main() {
     // initialization
     let mut stderr = std::io::stderr();
     // method to check for unsigned integer for arguments
-    #[allow(needless_pass_by_value)]
+    #[cfg_attr(feature = "cargo-clippy", allow(needless_pass_by_value))]
     fn is_u32(v: String) -> Result<(), String> {
         if v.parse::<u32>().is_ok() {
             return Ok(());
@@ -45,7 +45,7 @@ fn main() {
     }
 
     // CLI setup
-    let matches = App::new("IT Operator")
+    let arg = App::new("IT Operator")
         .version(crate_version!())
         .author(crate_authors!("\n"))
         .about(crate_description!())
@@ -67,11 +67,20 @@ fn main() {
     //    println!("Matches: {}", &matches);
 
     // Gets a value for config if supplied by user, or defaults to "operator.yaml"
-    let config = matches.value_of("config").unwrap_or("operator.yaml");
-    println!("Value for config: {}", config);
+    let file = arg.value_of("config").unwrap_or("operator.yaml");
+    println!("Value for config: {}", file);
+
+    let mut config = webserver::Config::new();
+    match arg.value_of("port") {
+        Some(i) => {
+            config.port = i.parse::<u32>().unwrap();
+            ()
+        }
+        _ => (),
+    }
 
     // start webserver
-    if let Err(e) = webserver::run() {
+    if let Err(e) = webserver::run(config) {
         writeln!(&mut stderr, "Application error: {}", e).expect("Could not write to stderr");
         process::exit(1);
     }
