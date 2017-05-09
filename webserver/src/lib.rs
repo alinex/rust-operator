@@ -36,7 +36,7 @@ pub struct Config {
 impl Config {
     /// Get the default configuration.
     pub fn new() -> Config {
-        Config { port: 3000 }
+        Config { port: 4000 }
     }
 }
 impl fmt::Display for Config {
