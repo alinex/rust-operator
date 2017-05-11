@@ -4,22 +4,24 @@ run LOGLEVEL="info":
 test:
   RUST_BACKTRACE=1 cargo test -- --nocapture
 testlib PATTERN:
-	RUST_BACKTRACE=1 cargo test --lib {{PATTERN}} -- --nocapture
+  RUST_BACKTRACE=1 cargo test --lib {{PATTERN}} -- --nocapture
 
 debug TEST:
-	cargo test --test {{TEST}} --features debug
+  cargo test --test {{TEST}} --features debug
 
 build:
-	cargo build
+  cargo build
 check:
-	cargo check
+  cargo check
+outdated:
+  cargo outdated
 
 @bench: nightly
   cargo bench
   just stable
 
 @nightly:
-	rustup override add nightly 2> /dev/null > /dev/null
+  rustup override add nightly 2> /dev/null > /dev/null
 
 @stable:
   rustup override remove 2> /dev/null
