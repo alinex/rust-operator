@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["Alexander Schilling <info@alinex.de>"]
 
 [dependencies]
-log = "0.3"
-env_logger = "0.3"
-iron = "*"
-router = "*"
+log = "~0.3"
+env_logger = "~0.4"
+iron = "~0.5"
+router = "~0.5"

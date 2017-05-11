@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "An application to manage data structures through a web interface."
 readme = "README.md"
 repository = "https://github.com/alinex/rust-operator"
-#documentation = "http://ironframework.io/doc/iron/"
+#documentation = "https://alinex.github.io/rust-operator"
 license = "Apache 2"
 authors = ["Alexander Schilling <info@alinex.de>"]
 
@@ -16,7 +16,7 @@ ansi_term = '~0.9.0'
 webserver = { path = "webserver" }
 
 [dev-dependencies]
-gag = '*'
+gag = '~0.1.0'
 
 [profile.release]
 opt-level = 3

@@ -3,18 +3,22 @@ run LOGLEVEL="info":
 
 test:
   RUST_BACKTRACE=1 cargo test -- --nocapture
-testlib PATTERN:
+testonly PATTERN:
   RUST_BACKTRACE=1 cargo test --lib {{PATTERN}} -- --nocapture
 
 debug TEST:
   cargo test --test {{TEST}} --features debug
 
-build:
-  cargo build
 check:
   cargo check
 outdated:
   cargo outdated
+update:
+  cargo update
+  @just outdated
+updateonly CRATE:
+  cargo update -p {{CRATE}}
+  @just outdated
 
 @bench: nightly
   cargo bench
